@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StudentPerks: free and discounted offers for students</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#F2F5FB;--surface:#fff;--ink:#0F1730;--muted:#55607A;--line:#D5DCEB;--blue:#2F5BFF;--blue-ink:#fff;--hl:#FFD84D;--free:#0A7C57;--free-bg:#DDF6EC;--disc:#8A4108;--disc-bg:#FFEBC7;--f:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1226;--surface:#151D38;--ink:#EEF1FA;--muted:#9AA6C4;--line:#2A3560;--blue:#7C98FF;--blue-ink:#0C1226;--free:#4FD8A4;--free-bg:#12382E;--disc:#FFC56B;--disc-bg:#3A2B10}}
+:root[data-theme="dark"]{--bg:#0C1226;--surface:#151D38;--ink:#EEF1FA;--muted:#9AA6C4;--line:#2A3560;--blue:#7C98FF;--blue-ink:#0C1226;--free:#4FD8A4;--free-bg:#12382E;--disc:#FFC56B;--disc-bg:#3A2B10}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 130px);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.55 var(--f);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:1.3rem;letter-spacing:-.01em}
+.logo i{width:28px;height:20px;border-radius:6px;background:var(--hl);border:2px solid var(--ink);position:relative}
+.logo i::after{content:"";position:absolute;left:4px;right:4px;bottom:4px;height:3px;border-radius:2px;background:var(--ink)}
+.free-note{font-size:.9rem;color:var(--muted)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding:34px 0 30px}
+h1{font-size:clamp(2.3rem,6.2vw,3.9rem);line-height:1.02;font-weight:800;letter-spacing:-.025em}
+.lead{color:var(--muted);max-width:46ch;margin:18px 0 26px;font-size:1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 20px;border-radius:12px;font:600 1rem var(--f);border:2px solid var(--ink);cursor:pointer;text-decoration:none;min-height:44px;background:var(--surface);color:var(--ink)}
+.btn.pri{background:var(--blue);color:var(--blue-ink);border-color:var(--blue)}
+.id{background:var(--surface);border:2px solid var(--ink);border-radius:22px;padding:22px;width:100%;max-width:310px;margin-inline:auto;transform:rotate(-3deg);box-shadow:9px 9px 0 var(--hl);animation:drop .8s cubic-bezier(.2,.9,.3,1.25) both}
+@keyframes drop{from{transform:translateY(-50px) rotate(-10deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.id{animation:none}html{scroll-behavior:auto}.bar b{transition:none}}
+.slot{width:56px;height:10px;border-radius:6px;background:var(--bg);border:2px solid var(--ink);margin:0 auto 18px}
+.row{display:flex;gap:14px;align-items:center}
+.pic{width:62px;height:62px;border-radius:50%;background:var(--blue);display:grid;place-items:center;color:var(--blue-ink);font-weight:800;font-size:1.1rem;flex:none}
+.ln{height:10px;border-radius:5px;background:var(--line);margin:8px 0}
+.ln.s{width:60%}
+.stripe{background:var(--hl);color:#101828;font-weight:800;border-radius:10px;padding:8px 12px;margin:16px 0 14px;font-size:1.05rem}
+.meta{display:flex;justify-content:space-between;font-size:.9rem;font-weight:600;margin-bottom:6px}
+.bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden}
+.bar b{display:block;height:100%;width:0;background:var(--free);transition:width .3s}
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+.search{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 15px;border-radius:999px;font:600 .9rem var(--f);cursor:pointer;white-space:nowrap;min-height:40px}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.count{color:var(--muted);font-size:.9rem;padding:14px 0 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:18px;padding:14px 0 8px}
+.card{position:relative;overflow:hidden;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;display:flex;flex-direction:column}
+.card.done{border-color:var(--free)}
+.up{padding:18px 18px 18px;flex:1}
+.tag{display:inline-block;font-weight:700;font-size:.82rem;padding:3px 11px;border-radius:999px}
+.tag.free{background:var(--free-bg);color:var(--free)}
+.tag.disc{background:var(--disc-bg);color:var(--disc)}
+.cat{color:var(--muted);font-size:.85rem;margin-left:8px}
+.card h3{font-size:1.22rem;line-height:1.2;font-weight:700;margin:12px 0 6px}
+.card p{color:var(--muted);font-size:.95rem}
+.perf{position:relative;border-top:2px dashed var(--line)}
+.perf::before,.perf::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line)}
+.perf::before{left:-11px}.perf::after{right:-11px}
+.lo{padding:14px 18px 18px;display:grid;gap:12px}
+.how{font-size:.86rem;color:var(--muted)}
+.acts{display:flex;gap:8px}
+.acts .btn{flex:1;padding:9px 12px;font-size:.92rem;min-height:42px}
+.mark{border-color:var(--line)}
+.mark[aria-pressed=true]{background:var(--free-bg);color:var(--free);border-color:var(--free)}
+.empty{grid-column:1/-1;text-align:center;padding:40px 10px;color:var(--muted)}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;letter-spacing:-.02em;margin:46px 0 18px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.step{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:20px}
+.num{font-size:2.2rem;font-weight:800;color:var(--blue);line-height:1}
+.step h3{margin:10px 0 4px;font-size:1.1rem}
+.step p{color:var(--muted);font-size:.95rem}
+.tip{background:var(--hl);color:#101828;border-radius:20px;padding:24px;margin:30px 0 0}
+.tip h3{font-size:1.25rem;margin-bottom:6px}
+footer{color:var(--muted);font-size:.88rem;padding:34px 0 40px;max-width:70ch}
+@media(max-width:760px){.hero{grid-template-columns:1fr;gap:34px}.id{max-width:290px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo"><i></i>StudentPerks</div>
+    <div class="free-note">Free for every student</div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Your student ID pays for itself.</h1>
+      <p class="lead">Free software, cheaper subscriptions and student discounts, all in one place. Pick an offer, verify with your school, and claim it.</p>
+      <a class="btn pri" href="#offers">Browse offers</a>
+    </div>
+    <div class="id" aria-label="Your claim progress">
+      <div class="slot"></div>
+      <div class="row"><div class="pic">YOU</div><div style="flex:1"><div class="ln"></div><div class="ln s"></div></div></div>
+      <div class="stripe">Student ID</div>
+      <div class="meta"><span><span id="c">0</span> of <span id="t">0</span> claimed</span><span><span id="nf">0</span> free</span></div>
+      <div class="bar"><b id="bar"></b></div>
+    </div>
+  </section>
+
+  <div class="tools" id="offers">
+    <label class="sr" for="q" style="position:absolute;left:-9999px">Search offers</label>
+    <input class="search" id="q" type="search" placeholder="Search offers, like music, design or cloud" autocomplete="off">
+    <div class="chips" id="chips">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="free" aria-pressed="false">Free</button>
+      <button class="chip" data-f="disc" aria-pressed="false">Discounts</button>
+      <button class="chip" data-f="dev" aria-pressed="false">Dev and cloud</button>
+      <button class="chip" data-f="design" aria-pressed="false">Design</button>
+      <button class="chip" data-f="prod" aria-pressed="false">Productivity</button>
+      <button class="chip" data-f="fun" aria-pressed="false">Entertainment</button>
+      <button class="chip" data-f="shop" aria-pressed="false">Shopping and deals</button>
+      <button class="chip" data-f="done" aria-pressed="false">Claimed</button>
+    </div>
+  </div>
+  <div class="count" id="count" aria-live="polite"></div>
+  <main class="grid" id="grid"></main>
+
+  <h2>How to claim an offer</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h3>Pick an offer</h3><p>Filter by type or search for what you need.</p></div>
+    <div class="step"><div class="num">2</div><h3>Verify on the official page</h3><p>Select Claim offer. Each company checks your school email or student ID.</p></div>
+    <div class="step"><div class="num">3</div><h3>Mark it as claimed</h3><p>Tick it off here to track what you have. This is saved on your device only.</p></div>
+  </div>
+
+  <div class="tip">
+    <h3>Also ask with your ID in person</h3>
+    <p>Cinemas, cafés, gyms, bookstores, public transport and local shops often have student rates. Carry your ID and ask at the counter.</p>
+  </div>
+
+  <footer>
+    StudentPerks is free to use. It is a directory: each offer is run by its own company, which handles verification. Terms, prices and eligibility change over time and vary by country, so check the official page before you sign up. Not affiliated with any brand listed.
+  </footer>
+</div>
+
+<script>
+const O=[
+['github','GitHub Student Developer Pack','free','dev','Free developer tools, cloud credits and training in one pack.','Verify with your school email or student ID.','https://education.github.com/pack'],
+['jetbrains','JetBrains for students','free','dev','Free professional coding tools for learning.','Apply with your school email or student ID.','https://www.jetbrains.com/community/education/#students'],
+['azure','Azure for Students','free','dev','Free cloud credit and services for projects, no credit card needed.','Sign in and verify with your school email.','https://azure.microsoft.com/free/students/'],
+['aws','AWS Educate','free','dev','Free cloud learning paths and hands-on labs.','Sign up with your school email.','https://aws.amazon.com/education/awseducate/'],
+['figma','Figma for Education','free','design','Free design and prototyping plan for students.','Verify with your school email.','https://www.figma.com/education/'],
+['autodesk','Autodesk Education','free','design','Free educational access to design, 3D and engineering software.','Verify as a student on the Autodesk site.','https://www.autodesk.com/education/edu-software/overview'],
+['adobe','Adobe Creative Cloud for students','disc','design','Discounted plan with the Adobe creative apps.','Verify your student status at checkout.','https://www.adobe.com/creativecloud/buy/students.html'],
+['notion','Notion for Education','free','prod','Free upgraded plan for notes, planning and group projects.','Sign up with your school email.','https://www.notion.com/product/notion-for-education'],
+['m365','Microsoft 365 for Education','free','prod','Word, Excel and PowerPoint, if your school qualifies.','Enter your school email to check.','https://www.microsoft.com/education'],
+['chatgpt','ChatGPT Plus for students','free','prod','Four free months of ChatGPT Plus for eligible U.S. college and graduate students. Claim by October 31, 2026. Renews at the regular price unless you cancel.','U.S. students only. Verify through SheerID with a school email.','https://help.openai.com/en/articles/20001493-chatgpt-back-to-school-offer-for-students'],
+['spotify','Spotify Premium Student','disc','fun','Ad-free music at a reduced student price.','Verify through the student verification service.','https://www.spotify.com/student/'],
+['youtube','YouTube Premium Student','disc','fun','Ad-free videos and music at a student price.','Verify your student status when you join.','https://www.youtube.com/premium/student'],
+['prime','Amazon Prime Student','disc','shop','Shopping and streaming benefits at a student price, where offered.','Verify with your school email or ID.','https://www.amazon.com/primestudent'],
+['apple','Apple education pricing','disc','shop','Reduced prices on Mac and iPad, plus other offers.','Verify through the Apple education store.','https://www.apple.com/education/'],
+['unidays','UNiDAYS','disc','shop','Student codes for fashion, tech, food and more.','Create a free account and verify.','https://www.myunidays.com'],
+['beans','Student Beans','disc','shop','Student discounts from many brands.','Create a free account and verify.','https://www.studentbeans.com']
+];
+const CAT={dev:'Dev and cloud',design:'Design',prod:'Productivity',fun:'Entertainment',shop:'Shopping and deals'};
+let done=new Set(),f='all',q='';
+try{done=new Set(JSON.parse(localStorage.getItem('sp-done')||'[]'))}catch(e){}
+const $=s=>document.querySelector(s);
+function stats(){
+  const c=O.filter(o=>done.has(o[0])).length;
+  $('#c').textContent=c;$('#t').textContent=O.length;
+  $('#nf').textContent=O.filter(o=>o[2]==='free').length;
+  $('#bar').style.width=(c/O.length*100)+'%';
+}
+function render(){
+  const s=q.trim().toLowerCase();
+  const list=O.filter(o=>(f==='all'||f===o[2]||f===o[3]||(f==='done'&&done.has(o[0])))&&(!s||(o[1]+' '+o[4]+' '+CAT[o[3]]).toLowerCase().includes(s)));
+  $('#count').textContent=list.length+(list.length===1?' offer':' offers');
+  $('#grid').innerHTML=list.length?list.map(o=>{
+    const d=done.has(o[0]);
+    return `<article class="card${d?' done':''}"><div class="up"><span class="tag ${o[2]}">${o[2]==='free'?'Free':'Discount'}</span><span class="cat">${CAT[o[3]]}</span><h3>${o[1]}</h3><p>${o[4]}</p></div><div class="perf"></div><div class="lo"><div class="how">${o[5]}</div><div class="acts"><a class="btn pri" href="${o[6]}" target="_blank" rel="noopener noreferrer">Claim offer</a><button class="btn mark" data-id="${o[0]}" aria-pressed="${d}">${d?'Claimed':'Mark claimed'}</button></div></div></article>`}).join('')
+  :'<div class="empty">No offers match. Clear the search or pick another filter.</div>';
+}
+$('#grid').addEventListener('click',e=>{
+  const b=e.target.closest('.mark');if(!b)return;
+  const id=b.dataset.id;done.has(id)?done.delete(id):done.add(id);
+  try{localStorage.setItem('sp-done',JSON.stringify([...done]))}catch(e){}
+  stats();render();
+});
+$('#chips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  f=b.dataset.f;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===b));render();
+});
+$('#q').addEventListener('input',e=>{q=e.target.value;render()});
+stats();render();
+</script>
+</body>
+</html>
